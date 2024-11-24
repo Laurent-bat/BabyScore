@@ -1,54 +1,76 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import MatchList from './MatchList'
+import MatchForm from './MatchForm'
 import PlayerList from './PlayerList'
 import PlayerForm from './PlayerForm'
 
-function App() {
 
-  const [players, setPlayers]= useState([])
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [currentPlayer, setCurrentPlayer] = useState({})
 
-  useEffect(() => {
-    fetchPlayers()
-  }, [])
+import React from 'react';
+import {Text, View} from 'react-native';
 
-  const fetchPlayers = async () => {
-    const response = await fetch("http://127.0.0.1:5000/players")
-    const data = await response.json()
-    setPlayers(data.players)
-    console.log(data.players)
-  }
+const YourApp = () => {
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+      <Text>Try editing me! 🎉</Text>
+    </View>
+  );
+};
 
-  const closeModal = () =>  {
-    setIsModalOpen(false)
-    setCurrentPlayer({})
-  }
+export default YourApp;
 
-  const openCreateModal = () => {
-    if (!isModalOpen) setIsModalOpen(true)
-  }
+// function App() {
 
-  const openEditModal = (player) => {
-    if (isModalOpen) return
-    setCurrentPlayer(player)
-    setIsModalOpen(true)
-  }
+//   const [matchs, setMatchs]= useState([])
+//   const [isModalOpen, setIsModalOpen] = useState(false)
+//   const [currentMatch, setCurrentMatch] = useState({})
 
-  const onUpdate = () => {
-    closeModal()
-    fetchPlayers()
-  }
+//   useEffect(() => {
+//     fetchMatchs()
+//   }, [])
 
-  return <>
-  <PlayerList players={players} updatePlayer={openEditModal} updateCallback={onUpdate}/> 
-  <button onClick={openCreateModal}>Create New player</button>
-  { isModalOpen && <div className='modal'>
-    <div className='modal-content'>
-      <span className='close' onClick={closeModal}>&times;</span>
-      <PlayerForm existingPlayer={currentPlayer} updateCallback={onUpdate}/></div>
-    </div>}
-  </>
-}
+//   const fetchMatchs = async () => {
+//     const response = await fetch("http://127.0.0.1:5000/matchs")
+//     const data = await response.json()
+//     setMatchs(data.matchs)
+//     console.log(data.matchs)
+//   }
 
-export default App
+//   const closeModal = () =>  {
+//     setIsModalOpen(false)
+//     setCurrentMatch({})
+//   }
+
+//   const openCreateModal = () => {
+//     if (!isModalOpen) setIsModalOpen(true)
+//   }
+
+//   const openEditModal = (match) => {
+//     if (isModalOpen) return
+//     setCurrentMatch(match)
+//     setIsModalOpen(true)
+//   }
+
+//   const onUpdate = () => {
+//     closeModal()
+//     fetchMatchs()
+//   }
+
+//   return <>
+//   <MatchList matchs={matchs} updateMatch={openEditModal} updateCallback={onUpdate}/> 
+//   <button onClick={openCreateModal}>Create New match</button>
+//   { isModalOpen && <div className='modal'>
+//     <div className='modal-content'>
+//       <span className='close' onClick={closeModal}>&times;</span>
+//       <MatchForm existingMatch={currentMatch} updateCallback={onUpdate}/></div>
+//     </div>}
+//   </>
+// }
+
+// export default App
